@@ -15,17 +15,17 @@ var annotate = require('gulp-ng-annotate')
 
 var p = {
   sass: {
-    src:'public/sass/main.scss',
-    dest:'build/public/style/'
+    src:'src/public/sass/main.scss',
+    dest:'public/style/'
   },
   scripts: {
-    coffee: 'public/scripts/main.coffee',
-    js: 'public/scripts/main.js',
-    dest: 'build/public/scripts/'
+    coffee: 'src/public/scripts/main.coffee',
+    js: 'src/public/scripts/main.js',
+    dest: 'public/scripts/'
   },
   jade: {
-    src: 'jade/*.jade',
-    dest: 'build/' 
+    src: 'src/jade/*.jade',
+    dest: '' 
   }
 }
 
@@ -34,7 +34,7 @@ p.scripts.src = p.scripts.coffee;
 // Livereload
 gulp.task('connect', function() {
   connect.server({
-    root:'build',
+    root:'./',
     livereload: true,
     port: 8000
   })
@@ -44,8 +44,8 @@ gulp.task('connect', function() {
 gulp.task('compass', function() {
   gulp.src(p.sass.src)
     .pipe(compass({
-      css: 'build/public/style',
-      sass: 'public/sass', 
+      css: 'public/style',
+      sass: 'src/public/sass', 
       require: ['susy', 'breakpoint', 'modular-scale'],
       sourcemap: true
     }))
@@ -84,19 +84,19 @@ gulp.task('jade', function() {
 
 // Images
 gulp.task('images', function() {
-  gulp.src('public/images/**/*')
+  gulp.src('src/public/images/**/*')
     .pipe(plumber())
     .pipe(imagemin())
-    .pipe(gulp.dest('build/public/images/'))
+    .pipe(gulp.dest('public/images/'))
     .pipe(connect.reload())
 })
 
 // Watch
 gulp.task('watch', function() {
-  gulp.watch('public/sass/**/*.scss', ['compass']);
-  gulp.watch('jade/**/*.jade', ['jade']);
-  gulp.watch('public/scripts/**/*', ['browserify']);
-  gulp.watch('public/images/**',['images']);
+  gulp.watch('src/public/sass/**/*.scss', ['compass']);
+  gulp.watch('src/jade/**/*.jade', ['jade']);
+  gulp.watch('src/public/scripts/**/*', ['browserify']);
+  gulp.watch('src/public/images/**',['images']);
 })
 
 // Go
