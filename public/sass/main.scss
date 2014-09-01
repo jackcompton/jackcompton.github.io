@@ -1,0 +1,46 @@
+@import "compass/reset";
+@import "susy";
+@import "breakpoint";
+@import "modular-scale";
+
+// Variables
+$susy:(
+  columns: 12,
+  gutters: 1/4
+);
+
+$ms-base: 1em;
+$ms-ratio: $golden;
+
+// File imports
+@import "mixins";
+
+html,body {
+	height: 100%;
+}
+
+.container {
+	text-align:center;
+	height: 100%;
+	width: 100%;
+	background: tomato;
+	font-family: 'Lato';
+	font-weight: normal;
+	font-size: 30px;
+	em {
+		font-weight: 100;
+	}
+}
+.content {
+	display: inline-block;
+    color: gold;
+    @include vertical-align();
+    p.iconography {
+    	font-size:15px;
+    	i {
+      		margin: 20px;
+    	}
+    }
+    
+
+}
